@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.kkdev_hustler_fund_app.repositories.repo_implementations.AuthRepositoryImpl
+import com.kenya.internlink.repositories.repo_implementations.AuthRepositoryImpl
 import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.models.ApiResult
 import com.kenya.internlink.models.LoginDetails

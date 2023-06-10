@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kenya.internlink.screens.DialPadLoginScreen
+import com.kenya.internlink.screens.LandingScreen
 import com.kenya.internlink.screens.LoginScreen
 
 
@@ -29,7 +30,7 @@ Navigation {
                     LoginScreen()
                 }
                 composable(Destinations.LoginScreenRoute.routeName) {
-                    DialPadLoginScreen()
+                    LandingScreen()
 
                 }
             }

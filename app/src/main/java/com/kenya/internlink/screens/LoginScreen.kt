@@ -1,14 +1,18 @@
 package com.kenya.internlink.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -36,6 +40,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -44,6 +49,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kenya.internlink.R
 import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.helpers.Navigation
 import com.kenya.internlink.ui.theme.PrimaryColor
@@ -81,13 +87,21 @@ fun LoginScreen() {
                 .height(200.dp), contentAlignment = Alignment.Center
 
         ) {
-            Text(
-                text = "InternLink",
-                fontSize = 30.sp,
-                fontFamily = FontFamily.Monospace,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
+            Column(
+                modifier = Modifier.padding(10.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = "InternLink",
+                    fontSize = 30.sp,
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+
+            }
         }
 
         Card(
@@ -123,6 +137,13 @@ fun LoginScreen() {
                 PasswordTextField()
                 Spacer(modifier = Modifier.height(16.dp))
                 LoginButton(email, password, scope, viewModel)
+                Image(
+                    painter = painterResource(id = R.drawable.careers_inside),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(bottom = 15.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                )
 
             }
         }

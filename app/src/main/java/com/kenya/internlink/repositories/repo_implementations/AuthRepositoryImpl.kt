@@ -1,4 +1,4 @@
-package com.example.kkdev_hustler_fund_app.repositories.repo_implementations
+package com.kenya.internlink.repositories.repo_implementations
 
 import android.util.Log
 import com.kenya.internlink.models.ApiResult
