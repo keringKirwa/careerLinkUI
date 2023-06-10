@@ -5,8 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -33,11 +33,11 @@ import com.kenya.internlink.ui.theme.SecondaryColor
 
 @Composable
 fun FeaturedItem(
-    companyName: String = "",
-    jobTitle: String = "",
-    workingTime: String = "",
-    salaryAmount: String = "",
-    countyName: String = "",
+    companyName: String,
+    jobTitle: String,
+    workingTime: String,
+    salaryAmount: String,
+    countyName: String,
     imagePainter: Painter
 ) {
     Card(
@@ -46,14 +46,15 @@ fun FeaturedItem(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(SealColor)
+                .fillMaxSize()
+                .background(PrimaryColor)
+                ,
+            verticalArrangement = Arrangement.SpaceAround
         ) {
             //first
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
                     .padding(horizontal = 10.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -69,7 +70,7 @@ fun FeaturedItem(
                                 RoundedCornerShape(4.dp)
                             )
                     )
-                    Text(text = companyName, fontFamily = FontFamily.SansSerif)
+                    Text(text = companyName, fontFamily = FontFamily.SansSerif, color = SecondaryColor)
 
                 }
                 Column(
@@ -81,7 +82,7 @@ fun FeaturedItem(
                         contentDescription = null,
                         tint = SecondaryColor
                     )
-                    Text(text = "Book Mark", fontSize = 10.sp, color = SecondaryColor)
+                    Text(text = "Book Mark", fontSize = 10.sp, color = Color.White)
 
 
                 }
@@ -100,7 +101,7 @@ fun FeaturedItem(
                     fontSize = 20.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold,
-                    color = PrimaryColor
+                    color = Color.White
                 )
 
             }
@@ -109,35 +110,26 @@ fun FeaturedItem(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = workingTime,
-                    fontSize = 17.sp,
+                    fontSize = 10.sp,
                     fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold,
                     color = Color.LightGray
 
                 )
                 Text(
                     text = salaryAmount,
-                    fontSize = 20.sp,
+                    fontSize = 16.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
-                    color = PrimaryColor
+                    color = Color.White
                 )
 
 
             }
-            //fourth
-            Text(
-                text = countyName,
-                fontSize = 20.sp,
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Bold,
-                color = PrimaryColor,
-                modifier = Modifier.fillMaxWidth(),
-            )
 
         }
 

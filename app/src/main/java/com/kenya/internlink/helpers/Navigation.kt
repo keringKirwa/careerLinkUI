@@ -8,8 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kenya.internlink.screens.DialPadLoginScreen
-import com.kenya.internlink.screens.LandingScreen
+import com.kenya.internlink.screens.landing_screen.LandingScreen
 import com.kenya.internlink.screens.LoginScreen
 
 
@@ -27,10 +26,12 @@ Navigation {
         CompositionLocalProvider(navControllerLocal provides navController) {
             NavHost(navController = navController, startDestination = Destinations.HomeScreenRoute.routeName) {
                 composable(Destinations.HomeScreenRoute.routeName) {
-                    LoginScreen()
+                    LandingScreen()
+
                 }
                 composable(Destinations.LoginScreenRoute.routeName) {
-                    LandingScreen()
+                    LoginScreen()
+
 
                 }
             }
