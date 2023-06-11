@@ -1,6 +1,5 @@
 package com.kenya.internlink.screens.landing_screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,16 +16,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -41,9 +39,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -55,8 +51,6 @@ import androidx.compose.ui.unit.sp
 import com.kenya.internlink.R
 import com.kenya.internlink.ui.theme.DividerColor
 import com.kenya.internlink.ui.theme.PrimaryColor
-import com.kenya.internlink.ui.theme.SealColor
-import com.kenya.internlink.ui.theme.SecondaryColor
 import com.kenya.internlink.ui.theme.customRoundedShape
 
 
@@ -75,7 +69,7 @@ fun LandingScreen() {
                     PrimaryColor,
                     shape = RoundedCornerShape(bottomEnd = 50.dp, bottomStart = 50.dp)
                 )
-                .height(130.dp)
+                .height(120.dp)
                 .fillMaxWidth()
         )
         Column(
@@ -85,12 +79,10 @@ fun LandingScreen() {
 
         ) {
             SearchRow()
-            Spacer(modifier = Modifier.height(16.dp))
             AccountInfoRow()
             Spacer(modifier = Modifier.height(25.dp))
             FeaturedOpportunities()
-
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(25.dp))
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -111,7 +103,7 @@ fun SearchRow() {
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.Transparent)
-            .padding(12.dp),
+            .padding(horizontal = 12.dp, vertical = 5.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
@@ -165,14 +157,20 @@ fun CustomTextField(
             )
         },
         label = { Text(text = "Search Opportunities ...", fontSize = 12.sp) },
-        placeholder = { Text(text = "e.g internships ...", fontFamily = FontFamily.SansSerif, fontSize = 10.sp) },
+        placeholder = {
+            Text(
+                text = "e.g internships ...",
+                fontFamily = FontFamily.SansSerif,
+                fontSize = 10.sp
+            )
+        },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White,
-            focusedIndicatorColor= Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = PrimaryColor,
 
-        ),
+            ),
 
         )
 }
@@ -187,25 +185,27 @@ fun AccountInfoRow() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 14.dp)
-            .height(64.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+            .height(70.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         shape = customRoundedShape
 
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White), verticalAlignment = Alignment.CenterVertically
+                .background(Color.White),
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
             Row(
-                verticalAlignment = Alignment.CenterVertically, modifier = Modifier
-                    .padding(horizontal = 8.dp)
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(horizontal = 2.dp)
                     .weight(1f)
             ) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
-                        imageVector = Icons.Outlined.ThumbUp,
+                        imageVector = Icons.Filled.ThumbUp,
                         tint = PrimaryColor,
                         contentDescription = "",
                     )
@@ -215,10 +215,16 @@ fun AccountInfoRow() {
                     Text(
                         text = "100k",
                         fontSize = 16.sp,
-                        fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.Bold
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
-                    Text(text = "Likes", color = Color.LightGray, fontSize = 12.sp)
+                    Text(
+                        text = "Likes",
+                        color = Color.LightGray,
+                        fontSize = 10.sp,
+                        fontFamily = FontFamily.SansSerif
+                    )
 
                 }
 
@@ -226,7 +232,7 @@ fun AccountInfoRow() {
             VerticalDivider()
             Row(
                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = 2.dp)
                     .weight(1f)
             ) {
                 IconButton(onClick = { /*TODO*/ }) {
@@ -241,10 +247,49 @@ fun AccountInfoRow() {
                     Text(
                         text = "20K",
                         fontSize = 16.sp,
-                        fontFamily = FontFamily.Monospace,
+                        fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold
                     )
-                    Text(text = "profile Views", color = Color.LightGray, fontSize = 12.sp)
+                    Text(
+                        text = "profile Views",
+                        color = Color.LightGray,
+                        fontSize = 10.sp,
+                        fontFamily = FontFamily.SansSerif
+                    )
+
+                }
+            }
+
+            VerticalDivider()
+            /**
+             * Last item
+             */
+            Row(
+                verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+                    .padding(horizontal = 2.dp)
+                    .weight(1f)
+            ) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "",
+                        tint = PrimaryColor
+                    )
+
+                }
+                Column() {
+                    Text(
+                        text = "100",
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Followers",
+                        color = Color.LightGray,
+                        fontSize = 10.sp,
+                        fontFamily = FontFamily.SansSerif
+                    )
 
                 }
             }
@@ -339,7 +384,7 @@ fun RecommendedOpportunities() {
                 item {
                     Box(
                         modifier = Modifier
-                            .padding(5.dp)
+                            .padding(horizontal = 5.dp, vertical = 5.dp)
                             .fillMaxWidth()
 
                     ) {
@@ -348,7 +393,7 @@ fun RecommendedOpportunities() {
                             workingTime = "Full Time",
                             salaryAmount = "Ksh. 100,000/month",
                             countyName = "Kiambu",
-                            intern = true,
+                            isIntern = true,
                             companyName = "Safaricom Kenya",
                             imagePainter = painterResource(id = R.drawable.careers_inside)
                         )
@@ -364,101 +409,7 @@ fun RecommendedOpportunities() {
 }
 
 
-@Composable
-fun RecommendedOpportunity(
-    jobTitle: String,
-    intern: Boolean,
-    workingTime: String,
-    companyName: String,
-    salaryAmount: String,
-    countyName: String,
-    imagePainter: Painter
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(SealColor, shape = RoundedCornerShape(10.dp))
-        ,
-        horizontalAlignment = Alignment.Start
 
-    ) {
-
-        if (intern){
-            Text(
-                text = jobTitle.plus("(Intern)"),
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Bold,
-                fontSize = 10.sp,
-                color = Color.Black,
-                modifier = Modifier.padding(start = 20.dp, end = 10.dp)
-            )
-
-        }else{
-            Text(
-                text = "Attachment",
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Bold,
-                fontSize = 22.sp,
-                 color = SecondaryColor
-            , modifier = Modifier.padding(start = 20.dp, end = 10.dp)
-            )
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(SealColor, shape = RoundedCornerShape(10.dp))
-                .height(80.dp).padding(start = 20.dp, end = 10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = imagePainter, contentDescription = null, modifier = Modifier
-                    .size(50.dp)
-                    .clip(
-                        RoundedCornerShape(6.dp)
-                    )
-            )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = companyName,
-                    fontSize = 17.sp,
-                    
-                    color = PrimaryColor,
-                    fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = countyName.plus(" . ").plus(workingTime),
-                    fontSize = 10.sp,
-                    color = Color.Black
-
-                )
-
-            }
-            Column(
-                modifier = Modifier.background(Color.Transparent),
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.MailOutline,
-                    contentDescription = null,
-                    tint = SecondaryColor
-                )
-                Text(text = salaryAmount, fontSize = 10.sp, color = Color.LightGray)
-
-            }
-
-
-        }
-
-    }
-
-
-}
 
 
 
