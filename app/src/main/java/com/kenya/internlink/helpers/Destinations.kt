@@ -2,9 +2,9 @@ package com.kenya.internlink.helpers
 
 sealed class Destinations(val routeName: String) {
 
-    object HomeScreenRoute:Destinations("HomeScreen")
-    object SingleProductScreenRoute:Destinations("SingleProductScreen")
-    object LoginScreenRoute:Destinations("LoginScreen")
+    object LandingScreen:Destinations("HomeScreen")
+    object SingleProductScreen:Destinations("SingleProductScreen")
+    object SignInScreen:Destinations("LoginScreen")
 
 
 }

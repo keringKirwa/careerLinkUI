@@ -34,7 +34,7 @@ class AuthViewModel() : ViewModel() {
                         Log.d("VIEW_MODEL_SUCCESS::", it.data.toString())
 
                         _loginState.value= it.data
-                        navController?.navigate(Destinations.HomeScreenRoute.routeName)
+                        navController?.navigate(Destinations.LandingScreen.routeName)
 
                         Log.d("VIEW_MODEL_STATE::",_loginState.value.toString())
 

@@ -25,17 +25,17 @@ Navigation {
     fun OnSetUpNavigationGraph() {
         val navController = rememberNavController()
         CompositionLocalProvider(navControllerLocal provides navController) {
-            NavHost(navController = navController, startDestination = Destinations.SingleProductScreenRoute.routeName) {
-                composable(Destinations.SingleProductScreenRoute.routeName) {
-                    SingleOpportunityScreen()
+            NavHost(navController = navController, startDestination = Destinations.SingleProductScreen.routeName) {
+                composable(Destinations.SingleProductScreen.routeName) {
+                    SingleOpportunityScreen( navControllerLocal.current)
 
                 }
-                composable(Destinations.LoginScreenRoute.routeName) {
+                composable(Destinations.SignInScreen.routeName) {
                     LoginScreen()
 
 
                 }
-                composable(Destinations.HomeScreenRoute.routeName) {
+                composable(Destinations.LandingScreen.routeName) {
                     LandingScreen()
 
                 }

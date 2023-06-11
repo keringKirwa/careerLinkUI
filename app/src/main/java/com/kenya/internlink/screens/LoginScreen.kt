@@ -158,7 +158,7 @@ fun LoginButton(email: String, password: String, scope: CoroutineScope, viewMode
     Button(
         onClick = {
             scope.launch {
-                navController.navigate(Destinations.LoginScreenRoute.routeName)
+                navController.navigate(Destinations.SignInScreen.routeName)
                 viewModel.loginUser(email, password, navController)
             }
         },
