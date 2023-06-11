@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,6 +54,7 @@ fun SingleOpportunityScreen(navController: NavController? =null) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+
     ) {
 
         Column(
@@ -116,18 +118,19 @@ fun SingleOpportunityScreen(navController: NavController? =null) {
                 Spacer(modifier = Modifier.padding(bottom = 10.dp))
 
                 Text(
-                    text = "Senior UI/UX Designer",
-                    fontSize = 25.sp,
-                    fontFamily = FontFamily.Monospace,
+                    text = "Senior UI/UX Graphics Designer",
+                    fontSize = 28.sp,
+                    fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.White, textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.padding(bottom = 10.dp))
                 Text(
                     text = "Nairobi, Kenya.",
                     color = SecondaryColor,
                     fontSize = 10.sp,
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = FontFamily.SansSerif,
+
                 )
                 Spacer(modifier = Modifier.padding(bottom = 5.dp))
                 Text(
@@ -181,37 +184,53 @@ fun Tabs() {
                     .fillMaxWidth()
                     .padding(10.dp)
             ) {
-                Text(
-                    text = "About This Job",
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.ExtraBold,
-                    color = PrimaryColor
-                )
+
                 Spacer(modifier = Modifier.padding(vertical = 2.dp))
-                Text(
-                    text = JobDescription.aboutThisJob,
-                    fontSize = 12.sp,
-                    fontFamily = FontFamily.Default,
-                    color = Color.Black,
-                    modifier = Modifier.padding(start = 15.dp)
-                )
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                Text(
-                    text = "Job Responsibilities :",
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.ExtraBold,
-                    color = PrimaryColor
-                )
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
+
+
+
                 LazyColumn(
                     Modifier
                         .fillMaxWidth(),
                     contentPadding = PaddingValues(horizontal = 3.dp),
                 ) {
+                    item {
+                        Text(
+                            text = "About This Job.",
+                            fontSize = 20.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = PrimaryColor
+                        )
 
-                    repeat(JobDescription.specifications.size) {
+                    }
+                    item {
+
+                        Spacer(modifier = Modifier.padding(vertical = 3.dp))
+                    }
+                    item {
+                        Text(
+                            text = JobDescription.aboutThisJob,
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily.Default,
+                            color = Color.Black,
+                            modifier = Modifier.padding(start = 15.dp)
+                        )
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                    }
+                    item {
+                        Text(
+                            text = "Qualifications.",
+                            fontSize = 20.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = PrimaryColor
+                        )
+                    }
+                    repeat(JobDescription.qualifications.size) {
                         item {
                             Row(
                                 modifier = Modifier
@@ -226,8 +245,48 @@ fun Tabs() {
                                         .padding(top = 10.dp)
                                 )
                                 Text(
-                                    text = JobDescription.requirements[it],
-                                    fontSize = 15.sp,
+                                    text = JobDescription.qualifications[it],
+                                    fontSize = 13.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    color = Color.Black,
+                                    modifier = Modifier
+                                        .padding(start = 10.dp, top = 0.dp)
+
+                                )
+
+                            }
+
+                        }
+                    }
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                    }
+                    item {
+                        Text(
+                            text = "Job Responsibilities.",
+                            fontSize = 20.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = PrimaryColor
+                        )
+                    }
+                    repeat(JobDescription.roles.size) {
+                        item {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(10.dp)
+                                        .background(SecondaryColor, shape = RoundedCornerShape(4.dp))
+                                        .padding(top = 10.dp)
+                                )
+                                Text(
+                                    text = JobDescription.roles[it],
+                                    fontSize = 13.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     color = Color.Black,
                                     modifier = Modifier

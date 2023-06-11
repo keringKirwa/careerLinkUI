@@ -5,7 +5,7 @@ class JobDescription {
 
         val aboutThisJob =  "If you are a passionate and driven software engineer looking to join a dynamic team, we would love to hear from you! Please submit your resume and portfolio to [internLink@gmail.com]."
 
-        val specifications = arrayOf(
+        val roles = arrayOf(
             "Design, develop, test, and maintain high-quality software applications using Kotlin.",
             "Collaborate with cross-functional teams to gather requirements and translate them into technical specifications.",
             "Participate in code reviews and provide constructive feedback to ensure code quality.",
@@ -17,7 +17,7 @@ class JobDescription {
             "Mentor and guide junior software engineers, providing technical expertise and support."
 
         )
-         val requirements = arrayOf(
+         val qualifications = arrayOf(
              "Bachelor's or Master's degree in Computer Science, Software Engineering, or a related field.",
              "Strong proficiency in Kotlin programming language.",
              "Experience in developing and delivering high-quality software applications.",
