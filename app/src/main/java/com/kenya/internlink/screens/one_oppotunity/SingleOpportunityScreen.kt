@@ -42,15 +42,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kenya.internlink.R
+import com.kenya.internlink.helpers.CustomButton
 import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.helpers.JobDescription
+import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
+import com.kenya.internlink.ui.theme.RobotoFontFamily
+import com.kenya.internlink.ui.theme.SealColor
 import com.kenya.internlink.ui.theme.SecondaryColor
 import com.kenya.internlink.ui.theme.customRoundedShape
 
 @Composable
 @Preview(showBackground = true)
-fun SingleOpportunityScreen(navController: NavController? =null) {
+fun SingleOpportunityScreen(navController: NavController? = null) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -73,10 +77,12 @@ fun SingleOpportunityScreen(navController: NavController? =null) {
             ) {
 
                 IconButton(
-                    onClick = { navController?.let {
-                       it.navigate(Destinations.LandingScreen.routeName)
+                    onClick = {
+                        navController?.let {
+                            it.navigate(Destinations.LandingScreen.routeName)
 
-                    } },
+                        }
+                    },
                     modifier = Modifier.background(Color.Transparent),
 
                     ) {
@@ -131,13 +137,15 @@ fun SingleOpportunityScreen(navController: NavController? =null) {
                     fontSize = 10.sp,
                     fontFamily = FontFamily.SansSerif,
 
-                )
+                    )
                 Spacer(modifier = Modifier.padding(bottom = 5.dp))
                 Text(
                     text = "Full Time . 24K/month",
-                    color = Color.White,
+                    color = SealColor,
                     fontSize = 16.sp,
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = PoppinsFontFamily,
+                    fontWeight = FontWeight.Normal
+
                 )
                 Spacer(modifier = Modifier.height(30.dp))
 
@@ -213,7 +221,7 @@ fun Tabs() {
                             text = JobDescription.aboutThisJob,
                             fontSize = 12.sp,
                             fontFamily = FontFamily.Default,
-                            color = Color.Black,
+                            color = SecondaryColor,
                             modifier = Modifier.padding(start = 15.dp)
                         )
                     }
@@ -241,18 +249,10 @@ fun Tabs() {
                                 Box(
                                     modifier = Modifier
                                         .size(10.dp)
-                                        .background(PrimaryColor, shape = RoundedCornerShape(4.dp))
+                                        .background(PrimaryColor, shape = RoundedCornerShape(2.dp))
                                         .padding(top = 10.dp)
                                 )
-                                Text(
-                                    text = JobDescription.qualifications[it],
-                                    fontSize = 13.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    color = Color.Black,
-                                    modifier = Modifier
-                                        .padding(start = 10.dp, top = 0.dp)
-
-                                )
+                               CustomText(text = JobDescription.qualifications[it])
 
                             }
 
@@ -281,22 +281,23 @@ fun Tabs() {
                                 Box(
                                     modifier = Modifier
                                         .size(10.dp)
-                                        .background(SecondaryColor, shape = RoundedCornerShape(4.dp))
-                                        .padding(top = 10.dp)
+                                        .background(PrimaryColor, shape = CircleShape)
+                                        .padding(top = 10.dp),
                                 )
-                                Text(
-                                    text = JobDescription.roles[it],
-                                    fontSize = 13.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    color = Color.Black,
-                                    modifier = Modifier
-                                        .padding(start = 10.dp, top = 0.dp)
-
-                                )
+                                CustomText(text  = JobDescription.roles[it],)
 
                             }
 
                         }
+                    }
+
+                    item {
+                        CustomButton(text = "Apply Now") {
+                        }
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     }
 
                 }
@@ -309,6 +310,22 @@ fun Tabs() {
     }
 }
 
+
+@Composable
+fun CustomText(text : String) {
+    Text(
+        text = text,
+        fontSize = 12.sp,
+        letterSpacing = 0.3.sp,
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.ExtraLight,
+        color = Color.Black.copy(.6f),
+        modifier = Modifier
+            .padding(start = 10.dp, top = 0.dp)
+
+    )
+    
+}
 
 
 
