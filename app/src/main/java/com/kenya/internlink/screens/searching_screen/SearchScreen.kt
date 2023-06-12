@@ -1,6 +1,7 @@
 package com.kenya.internlink.screens.searching_screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -10,15 +11,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -176,31 +177,19 @@ fun SearchRow() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomSearchFiled() {
-    val text = remember { mutableStateOf(TextFieldValue("")) }
-    BoxWithConstraints(modifier = Modifier
-        .clipToBounds()) {
+    val enteredText = remember { mutableStateOf(TextFieldValue("")) }
+
+    BoxWithConstraints(modifier = Modifier.clipToBounds()) {
         TextField(
+            value = enteredText.value,
+            onValueChange = { enteredText.value = it },
             shape = CircleShape,
             modifier = Modifier
-                .padding(0.dp)
-                .requiredHeight(maxHeight+10.dp)
 
-            ,
-            value = text.value,
+                .fillMaxWidth()
+                .requiredHeight(maxHeight + 10.dp),
+            textStyle = LocalTextStyle.current.copy(fontSize = 16.sp, fontFamily = FontFamily.SansSerif),
             singleLine = true,
-            maxLines = 1,
-            onValueChange = {
-                text.value = it
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text
-            ),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search"
-                )
-            },
             placeholder = {
                 Text(
                     text = "Search opportunities ...",
@@ -208,15 +197,28 @@ fun CustomSearchFiled() {
                     fontSize = 14.sp
                 )
             },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search"
+                )
+            },
+            trailingIcon = {
+                if (enteredText.value.text.isNotEmpty()) {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        tint = SecondaryColor,
+                        contentDescription = "Clear",
+                        modifier = Modifier.clickable { enteredText.value = TextFieldValue("") }
+                    )
+                }
+            },
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = SealColor,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedLabelColor = PrimaryColor,
-
-                ),
-            textStyle = LocalTextStyle.current.copy(fontSize = 16.sp, fontFamily = FontFamily.SansSerif)
+            ),
         )
-
     }
 }
