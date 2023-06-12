@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.kenya.internlink.screens.landing_screen.LandingScreen
 import com.kenya.internlink.screens.LoginScreen
 import com.kenya.internlink.screens.one_oppotunity.SingleOpportunityScreen
+import com.kenya.internlink.screens.searching_screen.SearchScreen
 
 
 object
@@ -25,7 +26,7 @@ Navigation {
     fun OnSetUpNavigationGraph() {
         val navController = rememberNavController()
         CompositionLocalProvider(navControllerLocal provides navController) {
-            NavHost(navController = navController, startDestination = Destinations.SingleProductScreen.routeName) {
+            NavHost(navController = navController, startDestination = Destinations.SearchScreen.routeName) {
                 composable(Destinations.SingleProductScreen.routeName) {
                     SingleOpportunityScreen( navControllerLocal.current)
 
@@ -37,6 +38,10 @@ Navigation {
                 }
                 composable(Destinations.LandingScreen.routeName) {
                     LandingScreen()
+
+                }
+                composable(Destinations.SearchScreen.routeName) {
+                    SearchScreen()
 
                 }
             }

@@ -15,6 +15,7 @@ val  PrimaryColor= Color(0xFF013E5D)
 
 val DividerColor= Color(0xFFF1F1F1)
 val SealColor = Color(0xFFF9F9F9)
+val CustomSealColor = Color(0xFFF9E9F8)
 
 
 

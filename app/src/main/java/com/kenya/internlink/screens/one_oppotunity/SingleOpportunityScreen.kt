@@ -47,7 +47,6 @@ import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.helpers.JobDescription
 import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
-import com.kenya.internlink.ui.theme.RobotoFontFamily
 import com.kenya.internlink.ui.theme.SealColor
 import com.kenya.internlink.ui.theme.SecondaryColor
 import com.kenya.internlink.ui.theme.customRoundedShape
@@ -88,9 +87,11 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
                     ) {
 
                     Icon(
+                        modifier = Modifier.size(30.dp),
                         imageVector = Icons.Default.ArrowBack,
+
                         contentDescription = null,
-                        tint = Color.White
+                        tint = SealColor
                     )
 
                 }
@@ -117,14 +118,14 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
                     painter = painterResource(id = R.drawable.careers_inside),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(70.dp)
-                        .clip(CircleShape),
+                        .size(50.dp)
+                        .clip(RoundedCornerShape(3.dp)),
 
                     )
                 Spacer(modifier = Modifier.padding(bottom = 10.dp))
 
                 Text(
-                    text = "Senior UI/UX Graphics Designer",
+                    text = "Doctor(MO)",
                     fontSize = 28.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
@@ -315,11 +316,11 @@ fun Tabs() {
 fun CustomText(text : String) {
     Text(
         text = text,
-        fontSize = 12.sp,
+        fontSize = 11.sp,
         letterSpacing = 0.3.sp,
         fontFamily = PoppinsFontFamily,
         fontWeight = FontWeight.ExtraLight,
-        color = Color.Black.copy(.6f),
+        color = Color.Black.copy(.7f),
         modifier = Modifier
             .padding(start = 10.dp, top = 0.dp)
 

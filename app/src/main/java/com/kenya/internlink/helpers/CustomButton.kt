@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.kenya.internlink.ui.theme.PrimaryColor
+import com.kenya.internlink.ui.theme.SecondaryColor
 import com.kenya.internlink.ui.theme.customRoundedShape
 import com.kenya.internlink.view_models.AuthViewModel
 import kotlinx.coroutines.CoroutineScope

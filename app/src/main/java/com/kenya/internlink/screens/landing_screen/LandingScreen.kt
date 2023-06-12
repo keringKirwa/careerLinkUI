@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.sp
 import com.kenya.internlink.R
 import com.kenya.internlink.ui.theme.DividerColor
 import com.kenya.internlink.ui.theme.PrimaryColor
+import com.kenya.internlink.ui.theme.SecondaryColor
 import com.kenya.internlink.ui.theme.customRoundedShape
 
 
@@ -232,7 +233,7 @@ fun AccountInfoRow() {
             VerticalDivider()
             Row(
                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier
-                    .padding(horizontal = 2.dp)
+                    .padding(end = 2.dp)
                     .weight(1f)
             ) {
                 IconButton(onClick = { /*TODO*/ }) {
@@ -252,8 +253,9 @@ fun AccountInfoRow() {
                     )
                     Text(
                         text = "profile Views",
+                        lineHeight = 13.sp,
                         color = Color.LightGray,
-                        fontSize = 10.sp,
+                        fontSize = 9.sp,
                         fontFamily = FontFamily.SansSerif
                     )
 
