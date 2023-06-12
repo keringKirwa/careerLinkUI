@@ -28,6 +28,13 @@ class JobDescription {
              "Ability to work effectively both independently and as part of a team.",
              "Experience with Agile/Scrum methodologies is a plus.",
          )
+        val industries = arrayOf(
+            "Programming",
+            "Engineering",
+            "Data Science",
+            "Medicine",
+            "Banking and Finance"
+        )
 
     }
 

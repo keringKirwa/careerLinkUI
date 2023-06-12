@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,11 +18,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,12 +49,14 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kenya.internlink.R
+import com.kenya.internlink.helpers.JobDescription
+import com.kenya.internlink.screens.landing_screen.FeaturedItem
 import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
 import com.kenya.internlink.ui.theme.SealColor
@@ -75,10 +80,16 @@ fun SearchScreen() {
             .fillMaxSize()
             .background(Color.White), verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
             Spacer(modifier = Modifier.padding(top = 10.dp))
             SearchRow()
-            
+            Spacer(modifier = Modifier.padding(top = 5.dp))
+            SelectableRows()
+
         }
         TabRow(
             modifier = Modifier
@@ -130,6 +141,69 @@ fun SearchScreen() {
     }
 }
 
+@Composable
+fun SelectableRows() {
+    Row(
+        Modifier
+            .fillMaxWidth()
+
+    ) {
+        IconButton(
+            onClick = { /*TODO*/ },
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.filter_search),
+                contentDescription = "Search",
+                tint = Color.Black,
+                modifier = Modifier.size(30.dp)
+            )
+        }
+        FilterItems()
+    }
+
+
+}
+
+@Composable
+fun FilterItems() {
+    var selectedItemIndex by remember { mutableStateOf(0) }
+
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(end = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(7.dp)
+    ) {
+        itemsIndexed(JobDescription.industries) { index, item ->
+            Box(
+                modifier = Modifier
+                    .height(IntrinsicSize.Min) // Adjust the height based on content
+                    .padding(horizontal = 5.dp)
+                    .background(
+                        if (index == selectedItemIndex) PrimaryColor else SealColor,
+                        shape = customRoundedShape
+                    )
+                    .clickable {
+                        selectedItemIndex = index
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = item,
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp, vertical = 10.dp)
+                        .fillMaxSize()
+                        .align(Alignment.Center),
+                    color = if (index == selectedItemIndex) SecondaryColor else PrimaryColor,
+                    fontFamily = FontFamily.SansSerif,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
 fun SearchRow() {
@@ -155,8 +229,7 @@ fun SearchRow() {
         Box(
             modifier = Modifier
                 .weight(1f)
-                .height(45.dp)
-            , contentAlignment = Alignment.Center
+                .height(45.dp), contentAlignment = Alignment.Center
         ) {
             CustomSearchFiled()
         }
@@ -182,13 +255,15 @@ fun CustomSearchFiled() {
     BoxWithConstraints(modifier = Modifier.clipToBounds()) {
         TextField(
             value = enteredText.value,
-            onValueChange = { enteredText.value = it },
             shape = CircleShape,
+            onValueChange = { enteredText.value = it },
             modifier = Modifier
-
                 .fillMaxWidth()
                 .requiredHeight(maxHeight + 10.dp),
-            textStyle = LocalTextStyle.current.copy(fontSize = 16.sp, fontFamily = FontFamily.SansSerif),
+            textStyle = LocalTextStyle.current.copy(
+                fontSize = 16.sp,
+                fontFamily = FontFamily.SansSerif
+            ),
             singleLine = true,
             placeholder = {
                 Text(
@@ -197,19 +272,17 @@ fun CustomSearchFiled() {
                     fontSize = 14.sp
                 )
             },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search"
-                )
-            },
             trailingIcon = {
                 if (enteredText.value.text.isNotEmpty()) {
                     Icon(
                         imageVector = Icons.Default.Clear,
-                        tint = SecondaryColor,
+                        tint = PrimaryColor,
                         contentDescription = "Clear",
-                        modifier = Modifier.clickable { enteredText.value = TextFieldValue("") }
+                        modifier = Modifier
+                            .clickable {
+                                enteredText.value = TextFieldValue("")
+                            }
+                            .background(Color.White, shape = CircleShape)
                     )
                 }
             },
