@@ -37,11 +37,11 @@ Navigation {
 
                 }
                 composable(Destinations.LandingScreen.routeName) {
-                    LandingScreen()
+                    LandingScreen(navController)
 
                 }
                 composable(Destinations.SearchScreen.routeName) {
-                    SearchScreen()
+                    SearchScreen(navController)
 
                 }
             }

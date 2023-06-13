@@ -1,6 +1,7 @@
 package com.kenya.internlink.screens.landing_screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,8 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
@@ -32,32 +33,29 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.kenya.internlink.R
+import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.ui.theme.DividerColor
+import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
-import com.kenya.internlink.ui.theme.SecondaryColor
+import com.kenya.internlink.ui.theme.SealColor
 import com.kenya.internlink.ui.theme.customRoundedShape
 
 
 @Preview(showBackground = true)
 @Composable
-fun LandingScreen() {
+fun LandingScreen(navController: NavController? = null) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +77,7 @@ fun LandingScreen() {
                 .background(Color.Transparent)
 
         ) {
-            SearchRow()
+            SearchRow(navController)
             AccountInfoRow()
             Spacer(modifier = Modifier.height(25.dp))
             FeaturedOpportunities()
@@ -99,7 +97,7 @@ fun LandingScreen() {
 }
 
 @Composable
-fun SearchRow() {
+fun SearchRow(navController: NavController?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -109,11 +107,13 @@ fun SearchRow() {
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Box(modifier = Modifier.weight(1f)) {
-            CustomTextField()
+           DummySearchTextField(navController = navController)
         }
 
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController?.navigate(Destinations.SingleProductScreen.routeName)
+            },
         ) {
             Icon(
                 imageVector = Icons.Outlined.Settings,
@@ -135,45 +135,46 @@ fun SearchRow() {
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomTextField(
+fun DummySearchTextField(navController: NavController?
 ) {
-    var text = remember { mutableStateOf(TextFieldValue("")) }
-    TextField(
-        shape = RoundedCornerShape(5.dp),
-        value = text.value,
-        singleLine = true,
-        maxLines = 1,
-        onValueChange = {
-            text.value = it
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
-        ),
-        leadingIcon = {
+    Box(
+        modifier = Modifier
+            .height(40.dp)
+            .background(SealColor, shape = CircleShape)
+            .fillMaxWidth()
+            .clickable {
+                navController?.navigate(Destinations.SearchScreen.routeName)
+            }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search"
             )
-        },
-        label = { Text(text = "Search Opportunities ...", fontSize = 12.sp) },
-        placeholder = {
+            Spacer(modifier = Modifier.padding(10.dp))
+
             Text(
-                text = "e.g internships ...",
+                text = "Search jobs ... ",
+                fontSize = 14.sp,
+                letterSpacing = 0.3.sp,
                 fontFamily = FontFamily.SansSerif,
-                fontSize = 10.sp
+                color = Color.Black.copy(.8f),
+                modifier = Modifier
+                    .padding(start = 10.dp, top = 0.dp)
+
             )
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedLabelColor = PrimaryColor,
 
-            ),
+        }
 
-        )
+    }
+
+
 }
 
 

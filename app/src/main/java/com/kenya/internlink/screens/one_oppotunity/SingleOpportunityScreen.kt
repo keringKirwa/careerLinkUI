@@ -204,13 +204,7 @@ fun Tabs() {
                     contentPadding = PaddingValues(horizontal = 3.dp),
                 ) {
                     item {
-                        Text(
-                            text = "About This Job.",
-                            fontSize = 20.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = PrimaryColor
-                        )
+                        CustomTitle(text = "About This Job.")
 
                     }
                     item {
@@ -231,13 +225,7 @@ fun Tabs() {
                         Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     }
                     item {
-                        Text(
-                            text = "Qualifications.",
-                            fontSize = 20.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = PrimaryColor
-                        )
+                        CustomTitle(text = "Qualifications.")
                     }
                     repeat(JobDescription.qualifications.size) {
                         item {
@@ -263,13 +251,7 @@ fun Tabs() {
                         Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     }
                     item {
-                        Text(
-                            text = "Job Responsibilities.",
-                            fontSize = 20.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = PrimaryColor
-                        )
+                        CustomTitle(text = "Job Responsibilities.")
                     }
                     repeat(JobDescription.roles.size) {
                         item {
@@ -326,6 +308,18 @@ fun CustomText(text : String) {
 
     )
     
+}
+
+@Composable
+fun CustomTitle(text : String) {
+    Text(
+        text = text,
+        fontSize = 20.sp,
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.ExtraBold,
+        color = PrimaryColor
+    )
+
 }
 
 
