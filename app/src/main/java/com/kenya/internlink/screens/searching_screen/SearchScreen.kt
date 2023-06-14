@@ -65,8 +65,6 @@ import androidx.navigation.NavController
 import com.kenya.internlink.R
 import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.helpers.JobDescription
-import com.kenya.internlink.helpers.SuggestedJob
-import com.kenya.internlink.screens.landing_screen.RecommendedOpportunity
 import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
 import com.kenya.internlink.ui.theme.SealColor
@@ -156,7 +154,9 @@ fun SearchScreen(navController: NavController? = null) {
                 repeat(5) {
                     item {
                         Card(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp, horizontal = 10.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 15.dp, horizontal = 10.dp),
                             elevation = CardDefaults.cardElevation((0.5).dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White)
                         ) {
@@ -453,6 +453,7 @@ fun IconAndFilterComponents() {
                 modifier = Modifier.size(30.dp)
             )
         }
+
         FilterItems()
     }
 
@@ -513,7 +514,7 @@ fun SearchRow(navController: NavController?) {
 
         IconButton(
             onClick = {
-                navController?.navigate(Destinations.LandingScreen.routeName)
+                navController?.navigate(Destinations.HomeScreen.routeName)
             },
         ) {
             Icon(

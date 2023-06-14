@@ -1,4 +1,4 @@
-package com.kenya.internlink.helpers
+package com.kenya.internlink.screens.searching_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -49,7 +49,7 @@ fun SuggestedJob(
             .background(
                 Color.Transparent, shape = RoundedCornerShape(7.dp)
             )
-            .padding(horizontal = 5.dp, vertical = 10.dp),
+            .padding(horizontal = 5.dp, vertical = 7.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
@@ -139,7 +139,6 @@ fun SuggestedJob(
                         color = Color.Black.copy(.6f),
                         modifier = Modifier
                             .padding(start = 5.dp, top = 0.dp)
-
                     )
 
                 }
@@ -147,11 +146,12 @@ fun SuggestedJob(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.program_type),
-                        contentDescription = null,
-                        tint = Color.Black,
-                        modifier = Modifier.size(20.dp)
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(PrimaryColor, shape = CircleShape)
+                            .padding(end = 5.dp)
+
                     )
                     Text(
                         text = "Internship(Remote)",

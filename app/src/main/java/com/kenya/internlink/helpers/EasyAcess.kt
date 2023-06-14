@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,13 +27,11 @@ import com.kenya.internlink.ui.theme.PrimaryColor
 fun EasyText(text : String) {
     Text(
         text = text,
-        fontSize = 11.sp,
-        letterSpacing = 0.3.sp,
-        fontFamily = PoppinsFontFamily,
-        fontWeight = FontWeight.ExtraLight,
-        color = Color.Black.copy(.7f),
+        fontSize = 15.sp,
+        fontFamily = FontFamily.SansSerif,
+        color = Color.Black,
         modifier = Modifier
-            .padding(start = 10.dp, top = 0.dp)
+            .padding(0.dp)
 
     )
 

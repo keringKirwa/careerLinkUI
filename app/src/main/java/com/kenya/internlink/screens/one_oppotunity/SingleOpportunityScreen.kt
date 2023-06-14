@@ -78,7 +78,7 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
                 IconButton(
                     onClick = {
                         navController?.let {
-                            it.navigate(Destinations.LandingScreen.routeName)
+                            it.navigate(Destinations.HomeScreen.routeName)
 
                         }
                     },
