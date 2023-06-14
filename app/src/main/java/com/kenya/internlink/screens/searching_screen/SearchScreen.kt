@@ -29,6 +29,8 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -60,11 +62,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.navArgument
 import com.kenya.internlink.R
 import com.kenya.internlink.helpers.Destinations
-import com.kenya.internlink.helpers.GlobalNavigator
 import com.kenya.internlink.helpers.JobDescription
+import com.kenya.internlink.helpers.SuggestedJob
 import com.kenya.internlink.screens.landing_screen.RecommendedOpportunity
 import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
@@ -75,7 +76,7 @@ import com.kenya.internlink.ui.theme.customRoundedShape
 
 @Composable
 @Preview(showBackground = true)
-fun SearchScreen(navController: NavController? =null) {
+fun SearchScreen(navController: NavController? = null) {
     var tabIndex by remember { mutableStateOf(0) }
 
     val bottomNavigationItems = listOf(
@@ -154,29 +155,25 @@ fun SearchScreen(navController: NavController? =null) {
                 item { Spacer(modifier = Modifier.padding(5.dp)) }
                 repeat(5) {
                     item {
-                        Box(
-                            modifier = Modifier
-                                .padding(horizontal = 5.dp, vertical = 5.dp)
-                                .fillMaxWidth()
-
+                        Card(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp, horizontal = 10.dp),
+                            elevation = CardDefaults.cardElevation((0.5).dp),
+                            colors = CardDefaults.cardColors(containerColor = Color.White)
                         ) {
-                            RecommendedOpportunity(
-                                jobTitle = "Software Engineer",
-                                workingTime = "Full Time",
-                                salaryAmount = "Ksh. 100,000/month",
-                                countyName = "Kiambu",
-                                isIntern = true,
-                                companyName = "Safaricom Kenya",
-                                imagePainter = painterResource(id = R.drawable.careers_inside)
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+
+                            ) {
+                                SuggestedJob()
+
+                            }
                         }
 
 
                     }
                 }
             }
-
-
         }
 
         TabRow(
@@ -230,7 +227,7 @@ fun SearchScreen(navController: NavController? =null) {
 }
 
 @Composable
-fun SearchCustomTitle(text : String) {
+fun SearchCustomTitle(text: String) {
     Text(
         text = text,
         fontSize = 20.sp,
@@ -288,7 +285,7 @@ fun CompanyAndAttachment(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .defaultMinSize(minWidth = 200.dp,)
+            .defaultMinSize(minWidth = 200.dp)
             .background(SealColor, shape = RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))
     ) {

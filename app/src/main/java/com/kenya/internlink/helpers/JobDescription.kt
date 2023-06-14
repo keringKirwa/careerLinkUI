@@ -30,9 +30,9 @@ class JobDescription {
          )
         val industries = arrayOf(
             "Programming",
-            "Engineering",
+            "Electrical Engineering",
             "Data Science",
-            "Medicine",
+            "Medicine And Nursing",
             "Banking and Finance"
         )
 
