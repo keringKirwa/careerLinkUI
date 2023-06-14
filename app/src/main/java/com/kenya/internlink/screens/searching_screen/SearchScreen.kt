@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
@@ -396,7 +397,7 @@ fun SeeMoreButton(text: String) {
             .width(190.dp)
             .fillMaxWidth()
             .padding(start = 10.dp),
-        shape = RoundedCornerShape(3.dp),
+        shape = RoundedCornerShape(4.dp),
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White, containerColor = PrimaryColor
         ),
@@ -518,7 +519,7 @@ fun SearchRow(navController: NavController?) {
             },
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.notifications_saerch),
+                imageVector = Icons.Default.ArrowBack,
                 contentDescription = "Search",
                 tint = Color.Black,
                 modifier = Modifier.size(30.dp)

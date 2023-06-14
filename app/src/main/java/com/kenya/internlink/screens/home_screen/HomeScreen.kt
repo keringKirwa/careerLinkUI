@@ -5,9 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,16 +15,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -46,10 +44,7 @@ import androidx.navigation.NavController
 import com.kenya.internlink.AppData
 import com.kenya.internlink.R
 import com.kenya.internlink.helpers.Destinations
-import com.kenya.internlink.screens.landing_screen.DummySearchTextField
-import com.kenya.internlink.screens.landing_screen.SearchRow
 import com.kenya.internlink.screens.one_oppotunity.CustomText
-import com.kenya.internlink.screens.one_oppotunity.CustomTitle
 import com.kenya.internlink.ui.theme.PrimaryColor
 import com.kenya.internlink.ui.theme.SealColor
 import com.kenya.internlink.ui.theme.SecondaryColor
@@ -105,8 +100,16 @@ fun HomeScreen(navController: NavController? = null) {
         }
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
         FindYourJobSection()
+        Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
-        Spacer(modifier = Modifier.padding(vertical = 20.dp))
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height((0.3).dp)
+                .background(Color.LightGray.copy(alpha = .01f))
+        )
+
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "What Do Our Students Say ? ",
@@ -115,7 +118,7 @@ fun HomeScreen(navController: NavController? = null) {
                 fontWeight = FontWeight.ExtraBold,
             )
         }
-        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        Spacer(modifier = Modifier.padding(vertical = 15.dp))
         WhatOurStudentsSay()
     }
 
@@ -139,14 +142,23 @@ fun HomeSearchRow(navController: NavController?) {
                 .weight(1f),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.safaricom),
-                contentDescription = null,
+
+            Box(
                 modifier = Modifier
-                    .size(30.dp)
-                    .padding(3.dp)
-                    .clip(RoundedCornerShape(3.dp))
-            )
+                    .size(25.dp)
+                    .background(PrimaryColor, shape = CircleShape)
+                    .padding(4.dp), contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.all_jobs),
+                    contentDescription = null,
+                    tint = SecondaryColor,
+                    modifier = Modifier
+                        .size(20.dp)
+                )
+            }
+
+
             Spacer(modifier = Modifier.padding(horizontal = 3.dp))
             Text(
                 text = "InternLink",
@@ -217,14 +229,14 @@ fun FindYourJobSection() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.all_jobs),
+                    painter = painterResource(id = R.drawable.part_time),
                     contentDescription = null,
                     tint = Color.Black,
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(30.dp)
                 )
                 Text(
                     text = "44.8k",
-                    fontSize = 32.sp,
+                    fontSize = 30.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
                     color = PrimaryColor,
@@ -270,7 +282,7 @@ fun FindYourJobSection() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 10.dp)
+                .padding(start = 10.dp)
                 .weight(1f)
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -300,7 +312,7 @@ fun FindYourJobSection() {
                             painter = painterResource(id = R.drawable.part_time),
                             contentDescription = null,
                             tint = Color.Black,
-                            modifier = Modifier.size(25.dp)
+                            modifier = Modifier.size(20.dp)
                         )
                         Column() {
                             Text(
@@ -328,7 +340,7 @@ fun FindYourJobSection() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(PrimaryColor.copy(alpha = .03f))
-                            .height(32.dp),
+                            .height(30.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -369,7 +381,7 @@ fun FindYourJobSection() {
                             painter = painterResource(id = R.drawable.part_time),
                             contentDescription = null,
                             tint = Color.Black,
-                            modifier = Modifier.size(25.dp)
+                            modifier = Modifier.size(20.dp)
                         )
                         Column() {
                             Text(
@@ -397,7 +409,7 @@ fun FindYourJobSection() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(PrimaryColor.copy(alpha = .03f))
-                            .height(32.dp),
+                            .height(30.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -451,9 +463,10 @@ fun WhatStudentSay(
         modifier = Modifier
             .padding(horizontal = 5.dp)
             .width(300.dp)
+            .defaultMinSize(minHeight = 200.dp)
             .background(
                 SealColor,
-                shape = RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp, topEnd = 10.dp)
+                shape = RoundedCornerShape(10.dp)
             ),
     ) {
         Row(
@@ -474,14 +487,14 @@ fun WhatStudentSay(
             ) {
                 Text(
                     text = name,
-                    fontSize = 13.sp,
+                    fontSize = 12.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold,
                     color = PrimaryColor
                 )
                 Text(
                     text = newRole,
-                    fontSize = 20.sp,
+                    fontSize = 17.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold,
                 )
