@@ -88,29 +88,7 @@ fun EasyIconButton() {
 }
 
 /**
- * SuggestedJob(
-companyImage = when (index) {
-0 -> painterResource(id = R.drawable.appleicon)
-1 -> painterResource(id = R.drawable.meliora)
-2 -> painterResource(id = R.drawable.safaricom)
-3 -> painterResource(id = R.drawable.meliora)
-4 -> painterResource(id = R.drawable.eclectics)
-else -> {
-painterResource(id = R.drawable.meliora)
-}
-},
-companyName =
-when (index) {
-0 -> "Apple"
-1 -> "Meliora Technologies."
-2 -> "Safaricon/M-pesa"
-3 -> "Meliora"
-4 -> "Eclectics Ltd."
-else -> {
-"InternLink"
-}
-}
-)
+ *
  */
 
 

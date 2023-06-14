@@ -165,7 +165,40 @@ fun SearchScreen(navController: NavController? = null) {
                                     .fillMaxWidth()
 
                             ) {
-                                SuggestedJob()
+                                SuggestedJob(
+                                    companyImage = when (it) {
+                                        0 -> painterResource(id = R.drawable.appleicon)
+                                        1 -> painterResource(id = R.drawable.meliora)
+                                        2 -> painterResource(id = R.drawable.safaricom)
+                                        3 -> painterResource(id = R.drawable.meliora)
+                                        4 -> painterResource(id = R.drawable.eclectics)
+                                        else -> {
+                                            painterResource(id = R.drawable.meliora)
+                                        }
+                                    },
+                                    companyName =
+                                    when (it) {
+                                        0 -> "Apple"
+                                        1 -> "Meliora Technologies."
+                                        2 -> "Safaricon/M-pesa"
+                                        3 -> "Meliora"
+                                        4 -> "Eclectics Ltd."
+                                        else -> {
+                                            "InternLink"
+                                        }
+                                    },
+                                    jobTitle =
+                                    when (it) {
+                                        0 -> "Software Engineer"
+                                        1 -> "Medical Officer"
+                                        2 -> "Mechanical Engineer"
+                                        3 -> "Nursing"
+                                        4 -> "Machine Learning"
+                                        else -> {
+                                            "Data Analyst"
+                                        }
+                                    }
+                                )
 
                             }
                         }
@@ -318,7 +351,7 @@ fun CompanyAndAttachment(
 
                 Text(
                     text = companyName,
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold,
                     color = Color.Black

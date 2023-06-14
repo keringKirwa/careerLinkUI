@@ -40,7 +40,7 @@ import com.kenya.internlink.ui.theme.SecondaryColor
 @Preview(showBackground = true)
 fun SuggestedJob(
     companyImage: Painter = painterResource(id = R.drawable.appleicon),
-    jobType: String = "Attachment",
+    jobTitle: String = "Software Engineer",
     companyName: String = "Apple"
 ) {
     Column(
@@ -58,7 +58,7 @@ fun SuggestedJob(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.safaricom),
+                painter = companyImage,
                 contentDescription = null,
                 modifier = Modifier
                     .size(40.dp)
@@ -73,8 +73,8 @@ fun SuggestedJob(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "It Support",
-                    fontSize = 20.sp,
+                    text = jobTitle,
+                    fontSize = 16.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
@@ -89,7 +89,7 @@ fun SuggestedJob(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Eclectics Ltd.",
+                        text = companyName,
                         fontSize = 10.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
@@ -99,7 +99,7 @@ fun SuggestedJob(
                     )
                     Text(
                         text = "Ksh. 150K/month",
-                        fontSize = 15.sp,
+                        fontSize = 13.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
                         color = SecondaryColor,
@@ -136,7 +136,7 @@ fun SuggestedJob(
                         letterSpacing = 0.3.sp,
                         fontFamily = PoppinsFontFamily,
                         fontWeight = FontWeight.ExtraLight,
-                        color = Color.Black.copy(.7f),
+                        color = Color.Black.copy(.6f),
                         modifier = Modifier
                             .padding(start = 5.dp, top = 0.dp)
 
