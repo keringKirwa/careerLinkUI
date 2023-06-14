@@ -1,5 +1,10 @@
 package com.kenya.internlink.screens.home_screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +32,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,6 +46,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,10 +55,10 @@ import androidx.navigation.NavController
 import com.kenya.internlink.AppData
 import com.kenya.internlink.R
 import com.kenya.internlink.helpers.Destinations
-import com.kenya.internlink.screens.one_oppotunity.CustomText
 import com.kenya.internlink.ui.theme.PrimaryColor
 import com.kenya.internlink.ui.theme.SealColor
 import com.kenya.internlink.ui.theme.SecondaryColor
+import kotlinx.coroutines.delay
 
 @Composable
 @Preview(showBackground = true)
@@ -118,11 +129,118 @@ fun HomeScreen(navController: NavController? = null) {
                 fontWeight = FontWeight.ExtraBold,
             )
         }
-        Spacer(modifier = Modifier.padding(vertical = 15.dp))
+        Spacer(modifier = Modifier.padding(vertical = 8.dp))
         WhatOurStudentsSay()
+        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height((0.3).dp)
+                .background(Color.Gray.copy(alpha = .01f))
+        )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "InternLink Success Story ",
+                textAlign = TextAlign.Center,
+                fontSize = 15.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.ExtraBold,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        Spacer(modifier = Modifier.padding(vertical = 3.dp))
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .background(SealColor)
+            .weight(1f)){
+            InternLinkSuccesStory()
+
+        }
+
+    }
+
+
+}
+
+@Composable
+fun InternLinkSuccesStory() {
+
+    val stories = AppData.successStories
+    val numberOfStories = stories.size
+    var currentIndex by remember { mutableStateOf(0) }
+    var isVisible by remember { mutableStateOf(true) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .animateContentSize() // Animates the height change of the column
+    ) {
+
+        AnimatedVisibility(
+            visible = isVisible,
+            enter = slideInVertically(initialOffsetY = { height -> height },
+                animationSpec = tween(durationMillis = 400)),
+            exit = slideOutVertically(targetOffsetY = { height -> -height },
+                animationSpec = tween(durationMillis = 1000)),
+        ) {
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .background(SealColor, shape = RoundedCornerShape(bottomEnd = 10.dp, bottomStart = 10.dp))
+                ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().weight(1f),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "News Just In ",
+                        fontSize = 13.sp,
+                        color = SecondaryColor,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.ExtraBold,
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 5.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.kering_profile),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clip(shape = CircleShape)
+                    )
+                    Spacer(modifier = Modifier.padding(horizontal = 3.dp))
+
+                    Text(
+                        text = stories[currentIndex],
+                        fontSize = 8.sp,
+                        lineHeight = 12.sp,
+                        color = PrimaryColor,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+
+            }
+
+        }
+    }
+
+    LaunchedEffect(isVisible) {
+        delay(5000L) // Delay for the text to be visible
+        isVisible = false // Set visibility to false to animate the exit
+        delay(100L) // Reduce the delay for the exit animation
+        currentIndex = (currentIndex + 1) % numberOfStories
+        isVisible = true // Set visibility back to true for the next story
     }
 
 }
+
 
 
 @Composable
@@ -463,7 +581,7 @@ fun WhatStudentSay(
         modifier = Modifier
             .padding(horizontal = 5.dp)
             .width(300.dp)
-            .defaultMinSize(minHeight = 200.dp)
+            .defaultMinSize(minHeight = 190.dp)
             .background(
                 SealColor,
                 shape = RoundedCornerShape(10.dp)
@@ -506,10 +624,30 @@ fun WhatStudentSay(
                 .fillMaxWidth()
                 .padding(start = 10.dp)
         ) {
-            CustomText(text = content)
+            StudentQuote(text = content)
 
         }
 
     }
 
 }
+
+@Composable
+fun StudentQuote(text : String) {
+    Text(
+        text = text,
+        fontSize = 12.sp,
+        fontFamily = FontFamily.SansSerif,
+        modifier = Modifier
+            .padding(start = 10.dp, top = 0.dp)
+
+    )
+
+}
+
+
+
+
+
+
+

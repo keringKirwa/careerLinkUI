@@ -23,6 +23,10 @@ import com.kenya.internlink.screens.one_oppotunity.CustomText
 import com.kenya.internlink.ui.theme.PoppinsFontFamily
 import com.kenya.internlink.ui.theme.PrimaryColor
 
+/**
+ * import androidx.compose.runtime.getValue
+ */
+
 @Composable
 fun EasyText(text : String) {
     Text(
