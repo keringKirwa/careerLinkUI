@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -13,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -39,10 +43,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.kenya.internlink.AppData
 import com.kenya.internlink.R
 import com.kenya.internlink.helpers.Destinations
 import com.kenya.internlink.screens.landing_screen.DummySearchTextField
 import com.kenya.internlink.screens.landing_screen.SearchRow
+import com.kenya.internlink.screens.one_oppotunity.CustomText
 import com.kenya.internlink.screens.one_oppotunity.CustomTitle
 import com.kenya.internlink.ui.theme.PrimaryColor
 import com.kenya.internlink.ui.theme.SealColor
@@ -85,19 +91,32 @@ fun HomeScreen(navController: NavController? = null) {
         )
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
-        Row(modifier = Modifier.fillMaxWidth().padding(start = 10.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp)
+        ) {
             Text(
                 text = "Find Your Jobs.",
                 fontSize = 20.sp,
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.ExtraBold,
-
             )
-
-
         }
-        Spacer(modifier = Modifier.padding(vertical = 7.dp))
+        Spacer(modifier = Modifier.padding(vertical = 15.dp))
         FindYourJobSection()
+
+        Spacer(modifier = Modifier.padding(vertical = 20.dp))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "What Do Our Students Say ? ",
+                fontSize = 17.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.ExtraBold,
+            )
+        }
+        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        WhatOurStudentsSay()
     }
 
 }
@@ -174,32 +193,28 @@ fun HomeSearchRow(navController: NavController?) {
 
 }
 
-
 @Composable
 fun FindYourJobSection() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(175.dp)
-        ,
+            .height(175.dp),
     ) {
 
         //First Column
         Card(
             modifier = Modifier
                 .weight(1f)
-                .fillMaxHeight()
-
-                ,
-            elevation = CardDefaults.cardElevation((3).dp),
+                .fillMaxHeight(),
+            elevation = CardDefaults.cardElevation((2).dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
-        ){
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.all_jobs),
@@ -212,7 +227,7 @@ fun FindYourJobSection() {
                     fontSize = 32.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
-                    color = SecondaryColor,
+                    color = PrimaryColor,
                     modifier = Modifier
                         .padding(0.dp)
                 )
@@ -227,6 +242,24 @@ fun FindYourJobSection() {
                     modifier = Modifier
                         .padding(0.dp)
                 )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(PrimaryColor.copy(alpha = .05f))
+                        .height(40.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "See More",
+                        fontSize = 13.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                        color = PrimaryColor,
+                        modifier = Modifier
+                            .padding(0.dp)
+                    )
+
+                }
             }
 
         }
@@ -238,51 +271,75 @@ fun FindYourJobSection() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp)
-                .weight(1f).fillMaxHeight(),
+                .weight(1f)
+                .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
-                ,
-                elevation = CardDefaults.cardElevation((4).dp),
+                    .weight(1f),
+                elevation = CardDefaults.cardElevation((1).dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White)
-            ){
-                Row(
+            ) {
+                Column(
                     modifier = Modifier
-                        .padding(vertical = 20.dp)
-                        .fillMaxWidth().weight(1f),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround
-
+                        .fillMaxWidth()
+                        .weight(1f)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.part_time),
-                        contentDescription = null,
-                        tint = Color.Black,
-                        modifier = Modifier.size(25.dp)
-                    )
-                    Column() {
-                        Text(
-                            text = "27.7k",
-                            fontSize = 17.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.Bold,
-                            color = SecondaryColor,
-                            modifier = Modifier
-                                .padding(0.dp)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceAround
+
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.part_time),
+                            contentDescription = null,
+                            tint = Color.Black,
+                            modifier = Modifier.size(25.dp)
                         )
+                        Column() {
+                            Text(
+                                text = "27.7k",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                color = PrimaryColor,
+                                modifier = Modifier
+                                    .padding(0.dp)
+                            )
+                            Text(
+                                text = "Remote",
+                                fontSize = 10.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                            )
+
+
+                        }
+
+
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(PrimaryColor.copy(alpha = .03f))
+                            .height(32.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Text(
-                            text = "Full Time",
-                            fontSize = 12.sp,
+                            text = "See More",
+                            fontSize = 13.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
+                            color = PrimaryColor,
                         )
 
                     }
-
 
                 }
             }
@@ -291,50 +348,152 @@ fun FindYourJobSection() {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
-                ,
-                elevation = CardDefaults.cardElevation((4).dp),
+                    .weight(1f),
+                elevation = CardDefaults.cardElevation((1).dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White)
-            ){
-                Row(
+            ) {
+                Column(
                     modifier = Modifier
-                        .padding(vertical = 20.dp)
-                        .fillMaxWidth().weight(1f),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround
-
+                        .fillMaxWidth()
+                        .weight(1f)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.full_time),
-                        contentDescription = null,
-                        tint = Color.Black,
-                        modifier = Modifier.size(25.dp)
-                    )
-                    Column() {
-                        Text(
-                            text = "27.7k",
-                            fontSize = 17.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.Bold,
-                            color = SecondaryColor,
-                            modifier = Modifier
-                                .padding(0.dp)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceAround
+
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.part_time),
+                            contentDescription = null,
+                            tint = Color.Black,
+                            modifier = Modifier.size(25.dp)
                         )
+                        Column() {
+                            Text(
+                                text = "27.7k",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                color = PrimaryColor,
+                                modifier = Modifier
+                                    .padding(0.dp)
+                            )
+                            Text(
+                                text = "Full Time",
+                                fontSize = 10.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                            )
+
+
+                        }
+
+
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(PrimaryColor.copy(alpha = .03f))
+                            .height(32.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Text(
-                            text = "Full Time",
-                            fontSize = 12.sp,
+                            text = "See More",
+                            fontSize = 13.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
+                            color = PrimaryColor,
                         )
 
                     }
-
 
                 }
             }
 
 
+        }
 
+    }
+
+}
+
+@Composable
+fun WhatOurStudentsSay() {
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        repeat(AppData.testimonials.size) {
+            val item = AppData.testimonials[it]
+            item {
+                WhatStudentSay(item.name, item.role, item.companyName, item.content)
+
+            }
+        }
+
+    }
+
+
+}
+
+@Composable
+fun WhatStudentSay(
+    name: String = "Kelvin Kering",
+    role: String = "Engineer",
+    companyName: String = "Amazon Ltd",
+    content: String = "Hello there people"
+) {
+    val newRole = role.plus(" at ").plus(companyName)
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 5.dp)
+            .width(300.dp)
+            .background(
+                SealColor,
+                shape = RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp, topEnd = 10.dp)
+            ),
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(start = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.kering_profile),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+            )
+            Spacer(modifier = Modifier.padding(start = 10.dp))
+            Column(
+                modifier = Modifier
+            ) {
+                Text(
+                    text = name,
+                    fontSize = 13.sp,
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = PrimaryColor
+                )
+                Text(
+                    text = newRole,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.ExtraBold,
+                )
+            }
+        }
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp)
+        ) {
+            CustomText(text = content)
 
         }
 
