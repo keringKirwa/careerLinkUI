@@ -322,11 +322,8 @@ fun IconAndFilterComponents(navController: NavController?) {
                 modifier = Modifier.size(30.dp)
             )
         }
-
         FilterItems()
     }
-
-
 }
 
 @Composable
@@ -362,12 +359,10 @@ fun FilterItems() {
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
-                )
-            }
+                )            }
         }
     }
 }
-
 
 @Composable
 fun SearchCustomTitle(text: String) {

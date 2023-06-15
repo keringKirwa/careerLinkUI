@@ -5,11 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -36,6 +38,20 @@ if (index == selectedItemIndex) PrimaryColor else SealColor,
 shape = customRoundedShape
 )
  */
+
+
+
+@Composable
+fun CustomDivider()
+{
+    Divider(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height((.5).dp)
+        .background(Color.LightGray.copy(alpha = 0.01f))
+)
+
+}
 
 @Composable
 fun EasyText(text: String) {

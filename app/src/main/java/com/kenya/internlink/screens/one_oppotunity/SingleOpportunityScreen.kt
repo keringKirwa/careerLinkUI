@@ -34,6 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -293,17 +295,38 @@ fun Tabs() {
 }
 
 @Composable
-fun CustomText(text : String) {
-        Text(
-            text = text,
-            fontSize = 11.sp,
-            fontFamily = PoppinsFontFamily,
-            fontWeight = FontWeight.Normal,
-            letterSpacing = .2.sp,
-            color = Color.Black.copy(alpha = .7f),
-            modifier = Modifier.padding(start = 15.dp)
-            )
+fun CustomText(text: String) {
+
+    val coloredText = buildAnnotatedString {
+        val words = text.split(" ")
+
+        words.forEachIndexed { index, word ->
+            val startIndex = this.length
+            append(word)
+
+            // Check if the word contains "#" or "@"
+            if (word.contains("#") || word.contains("@")) {
+                addStyle(SpanStyle(color = PrimaryColor), startIndex, this.length)
+            }
+
+            // Add a space between words except for the last word
+            if (index < words.size - 1) {
+                append(" ")
+            }
+        }
+    }
+
+    Text(
+        text = coloredText,
+        fontSize = 11.sp,
+        fontFamily = PoppinsFontFamily,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = .2.sp,
+        color = Color.Black.copy(alpha = .7f),
+        modifier = Modifier.padding(start = 15.dp)
+    )
 }
+
 
 @Composable
 fun CustomTitle(text : String) {
