@@ -8,8 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kenya.internlink.screens.landing_screen.LandingScreen
 import com.kenya.internlink.screens.LoginScreen
+import com.kenya.internlink.screens.blogs_screen.BlogsScreen
 import com.kenya.internlink.screens.home_screen.HomeScreen
 import com.kenya.internlink.screens.one_oppotunity.SingleOpportunityScreen
 import com.kenya.internlink.screens.searching_screen.SearchScreen
@@ -46,6 +46,10 @@ Navigation {
 
                 composable(Destinations.SearchScreen.routeName) {
                     SearchScreen(navController)
+
+                }
+                composable(Destinations.BlogsScreen.routeName) {
+                    BlogsScreen(navController)
 
                 }
             }
