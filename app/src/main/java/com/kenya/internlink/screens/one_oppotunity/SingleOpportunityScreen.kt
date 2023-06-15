@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,7 +64,7 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(PrimaryColor)
+                .background(SealColor)
         ) {
             //first row (Icons Row )
             Row(
@@ -77,10 +78,7 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
 
                 IconButton(
                     onClick = {
-                        navController?.let {
-                            it.navigate(Destinations.HomeScreen.routeName)
-
-                        }
+                        navController?.navigate(Destinations.SearchScreen.routeName)
                     },
                     modifier = Modifier.background(Color.Transparent),
 
@@ -91,7 +89,7 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
                         imageVector = Icons.Default.ArrowBack,
 
                         contentDescription = null,
-                        tint = SealColor
+                        tint = Color.Black
                     )
 
                 }
@@ -118,18 +116,18 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
                     painter = painterResource(id = R.drawable.careers_inside),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(50.dp)
-                        .clip(RoundedCornerShape(3.dp)),
+                        .size(60.dp)
+                        .clip(CircleShape),
 
                     )
                 Spacer(modifier = Modifier.padding(bottom = 10.dp))
 
                 Text(
-                    text = "Doctor(MO)",
-                    fontSize = 28.sp,
+                    text = "Software Engineer",
+                    fontSize = 30.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White, textAlign = TextAlign.Center
+                    color = PrimaryColor, textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.padding(bottom = 10.dp))
                 Text(
@@ -142,8 +140,8 @@ fun SingleOpportunityScreen(navController: NavController? = null) {
                 Spacer(modifier = Modifier.padding(bottom = 5.dp))
                 Text(
                     text = "Full Time . 24K/month",
-                    color = SealColor,
-                    fontSize = 16.sp,
+                    color = Color.Black,
+                    fontSize = 14.sp,
                     fontFamily = PoppinsFontFamily,
                     fontWeight = FontWeight.Normal
 
@@ -214,9 +212,10 @@ fun Tabs() {
                     item {
                         Text(
                             text = JobDescription.aboutThisJob,
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily.Default,
-                            color = SecondaryColor,
+                            fontSize = 10.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.Bold,
+                            color = PrimaryColor,
                             modifier = Modifier.padding(start = 15.dp)
                         )
                     }
@@ -237,8 +236,8 @@ fun Tabs() {
                             ) {
                                 Box(
                                     modifier = Modifier
-                                        .size(10.dp)
-                                        .background(PrimaryColor, shape = RoundedCornerShape(2.dp))
+                                        .size(7.dp)
+                                        .background(PrimaryColor, shape = CircleShape)
                                         .padding(top = 10.dp)
                                 )
                                CustomText(text = JobDescription.qualifications[it])
@@ -293,21 +292,17 @@ fun Tabs() {
     }
 }
 
-
 @Composable
 fun CustomText(text : String) {
-    Text(
-        text = text,
-        fontSize = 11.sp,
-        letterSpacing = 0.3.sp,
-        fontFamily = PoppinsFontFamily,
-        fontWeight = FontWeight.ExtraLight,
-        color = Color.Black.copy(.7f),
-        modifier = Modifier
-            .padding(start = 10.dp, top = 0.dp)
-
-    )
-    
+        Text(
+            text = text,
+            fontSize = 11.sp,
+            fontFamily = PoppinsFontFamily,
+            fontWeight = FontWeight.Normal,
+            letterSpacing = .2.sp,
+            color = Color.Black.copy(alpha = .7f),
+            modifier = Modifier.padding(start = 15.dp)
+            )
 }
 
 @Composable

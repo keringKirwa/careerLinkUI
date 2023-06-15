@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,8 +27,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -97,7 +94,7 @@ fun SearchScreen(navController: NavController? = null) {
             Spacer(modifier = Modifier.padding(top = 5.dp))
             SearchRow(navController)
             Spacer(modifier = Modifier.padding(5.dp))
-            IconAndFilterComponents()
+            IconAndFilterComponents(navController)
             Spacer(modifier = Modifier.padding(vertical = 5.dp))
             LazyColumn(
                 Modifier
@@ -157,13 +154,13 @@ fun SearchScreen(navController: NavController? = null) {
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 15.dp, horizontal = 10.dp),
-                            elevation = CardDefaults.cardElevation((0.5).dp),
+                                .padding(top = 20.dp),
+                            elevation = CardDefaults.cardElevation((1).dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White)
                         ) {
                             Column(
                                 modifier = Modifier
-                                    .fillMaxWidth()
+                                    .fillMaxSize()
 
                             ) {
                                 SuggestedJob(
@@ -201,11 +198,13 @@ fun SearchScreen(navController: NavController? = null) {
                                     }
                                 )
 
+
                             }
                         }
 
 
                     }
+                    item { Spacer(modifier = Modifier.padding(vertical = 10.dp)) }
                 }
             }
         }
@@ -259,6 +258,116 @@ fun SearchScreen(navController: NavController? = null) {
         }
     }
 }
+
+
+@Composable
+fun SearchRow(navController: NavController?) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Transparent)
+            .padding(horizontal = 12.dp, vertical = 5.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+
+        IconButton(
+            onClick = {
+                navController?.navigate(Destinations.HomeScreen.routeName)
+            },
+        ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Search",
+                tint = Color.Black,
+                modifier = Modifier.size(30.dp)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .height(45.dp), contentAlignment = Alignment.Center
+        ) {
+            CustomSearchFiled()
+        }
+
+        IconButton(onClick = {
+            navController?.navigate(Destinations.SingleProductScreen.routeName)
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Search,
+                contentDescription = "Settings",
+                tint = Color.Black,
+                modifier = Modifier.size(34.dp)
+            )
+        }
+    }
+
+}
+
+@Composable
+fun IconAndFilterComponents(navController: NavController?) {
+    Row(
+        Modifier
+            .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
+
+    ) {
+        IconButton(
+            onClick = { /*TODO*/ },
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.filter_search),
+                contentDescription = "Search",
+                tint = Color.Black,
+                modifier = Modifier.size(30.dp)
+            )
+        }
+
+        FilterItems()
+    }
+
+
+}
+
+@Composable
+fun FilterItems() {
+    var selectedItemIndex by remember { mutableStateOf(0) }
+
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(end = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(7.dp)
+    ) {
+        itemsIndexed(JobDescription.industries) { index, item ->
+            Box(
+                modifier = Modifier
+                    .height(IntrinsicSize.Min) // Adjust the height based on content
+                    .background(
+                        if (index == selectedItemIndex) PrimaryColor else SealColor,
+                        shape = RoundedCornerShape(5.dp)
+                    )
+                    .clickable {
+                        selectedItemIndex = index
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = item,
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp, vertical = 10.dp)
+                        .fillMaxSize()
+                        .align(Alignment.Center),
+                    color = if (index == selectedItemIndex) SecondaryColor else PrimaryColor,
+                    fontFamily = FontFamily.SansSerif,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
 fun SearchCustomTitle(text: String) {
@@ -318,10 +427,13 @@ fun CompanyAndAttachment(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .defaultMinSize(minWidth = 200.dp)
-            .background(SealColor, shape = RoundedCornerShape(10.dp))
-            .clip(RoundedCornerShape(10.dp))
+            .width(250.dp)
+            .background(
+                SealColor,
+                shape = RoundedCornerShape(
+                    4.dp
+                )
+            )
     ) {
         Row(
             modifier = Modifier
@@ -364,48 +476,64 @@ fun CompanyAndAttachment(
                     fontFamily = PoppinsFontFamily,
                     fontWeight = FontWeight.ExtraLight,
                     color = Color.Black.copy(.7f),
-
-                    )
+                )
             }
 
         }
         CustomDotAndText(salary)
         CustomDotAndText(onlineOrRemote)
         Spacer(modifier = Modifier.height(10.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            SeeMoreButton(text = "See More")
-
-        }
-        Spacer(modifier = Modifier.height(10.dp))
+        SeeMoreSection()
 
     }
 
 }
 
 @Composable
-fun SeeMoreButton(text: String) {
-    Button(
-        onClick = {
-            //todo: IMPLEMENT THIS .
-        },
+fun SeeMoreSection() {
+    Box(
         modifier = Modifier
-            .width(190.dp)
+            .background(
+                PrimaryColor.copy(alpha = .05f),
+                shape = RoundedCornerShape(bottomEnd = 10.dp, bottomStart = 10.dp)
+            )
             .fillMaxWidth()
-            .padding(start = 10.dp),
-        shape = RoundedCornerShape(4.dp),
-        colors = ButtonDefaults.buttonColors(
-            contentColor = Color.White, containerColor = PrimaryColor
-        ),
-        contentPadding = PaddingValues(vertical = 7.dp)
+            .height(40.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Text(text = text, fontFamily = FontFamily.SansSerif, color = Color.White, fontSize = 16.sp)
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "visit Jobs",
+                fontSize = 13.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
+                color = PrimaryColor,
+                modifier = Modifier
+                    .padding(0.dp)
+            )
+            Text(
+                text = "Our InfoLine",
+                fontSize = 13.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
+                color = PrimaryColor,
+                modifier = Modifier
+                    .padding(0.dp)
+            )
+
+        }
+
+
     }
+
 }
+
 
 @Composable
 fun CustomDotAndText(text: String) {
@@ -435,114 +563,6 @@ fun CustomDotAndText(text: String) {
 
 
     }
-}
-
-@Composable
-fun IconAndFilterComponents() {
-    Row(
-        Modifier
-            .fillMaxWidth()
-
-    ) {
-        IconButton(
-            onClick = { /*TODO*/ },
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.filter_search),
-                contentDescription = "Search",
-                tint = Color.Black,
-                modifier = Modifier.size(30.dp)
-            )
-        }
-
-        FilterItems()
-    }
-
-
-}
-
-@Composable
-fun FilterItems() {
-    var selectedItemIndex by remember { mutableStateOf(0) }
-
-    LazyRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(end = 10.dp),
-        horizontalArrangement = Arrangement.spacedBy(7.dp)
-    ) {
-        itemsIndexed(JobDescription.industries) { index, item ->
-            Box(
-                modifier = Modifier
-                    .height(IntrinsicSize.Min) // Adjust the height based on content
-                    .padding(horizontal = 5.dp)
-                    .background(
-                        if (index == selectedItemIndex) PrimaryColor else SealColor,
-                        shape = customRoundedShape
-                    )
-                    .clickable {
-                        selectedItemIndex = index
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = item,
-                    modifier = Modifier
-                        .padding(horizontal = 20.dp, vertical = 10.dp)
-                        .fillMaxSize()
-                        .align(Alignment.Center),
-                    color = if (index == selectedItemIndex) SecondaryColor else PrimaryColor,
-                    fontFamily = FontFamily.SansSerif,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun SearchRow(navController: NavController?) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Transparent)
-            .padding(horizontal = 12.dp, vertical = 5.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-
-        IconButton(
-            onClick = {
-                navController?.navigate(Destinations.HomeScreen.routeName)
-            },
-        ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Search",
-                tint = Color.Black,
-                modifier = Modifier.size(30.dp)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .height(45.dp), contentAlignment = Alignment.Center
-        ) {
-            CustomSearchFiled()
-        }
-
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(
-                imageVector = Icons.Outlined.Search,
-                contentDescription = "Settings",
-                tint = Color.Black,
-                modifier = Modifier.size(34.dp)
-            )
-        }
-    }
-
 }
 
 

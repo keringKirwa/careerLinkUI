@@ -7,6 +7,7 @@ sealed class Destinations(val routeName: String) {
     object SingleProductScreen:Destinations("SingleProductScreen")
 
     object SearchScreen:Destinations("SearchScreen")
+    object BlogsScreen:Destinations("BlogsScreen")
 
 
 }

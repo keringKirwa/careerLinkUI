@@ -3,9 +3,13 @@ package com.kenya.internlink.helpers
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -25,10 +29,16 @@ import com.kenya.internlink.ui.theme.PrimaryColor
 
 /**
  * import androidx.compose.runtime.getValue
+ *
+ *
+ * .background(
+if (index == selectedItemIndex) PrimaryColor else SealColor,
+shape = customRoundedShape
+)
  */
 
 @Composable
-fun EasyText(text : String) {
+fun EasyText(text: String) {
     Text(
         text = text,
         fontSize = 15.sp,
@@ -74,6 +84,25 @@ fun EasyBoxAndText() {
     )
     CustomText(text = "Hello there")
 
+}
+
+@Composable
+fun SeeMoreButton(text: String) {
+    Button(
+        onClick = {
+            //todo: IMPLEMENT THIS .
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 10.dp),
+        shape = RoundedCornerShape(4.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White, containerColor = PrimaryColor
+        ),
+        contentPadding = PaddingValues(vertical = 7.dp)
+    ) {
+        Text(text = text, fontFamily = FontFamily.SansSerif, color = Color.White, fontSize = 16.sp)
+    }
 }
 
 @Composable

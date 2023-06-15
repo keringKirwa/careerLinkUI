@@ -27,7 +27,7 @@ Navigation {
     fun OnSetUpNavigationGraph() {
         val navController = rememberNavController()
         CompositionLocalProvider(navControllerLocal provides navController) {
-            NavHost(navController = navController, startDestination = Destinations.HomeScreen.routeName) {
+            NavHost(navController = navController, startDestination = Destinations.BlogsScreen.routeName) {
 
                 composable(Destinations.SignInScreen.routeName) {
                     LoginScreen()
